@@ -17,19 +17,16 @@ jobs:
 
       - name: Generate Xcode Project from project.yml
         run: |
-          cd GreymanExecutiveApp
           xcodegen generate
           echo "Generated project files:"
           ls -la
 
       - name: Show Available Schemes
         run: |
-          cd GreymanExecutiveApp
           xcodebuild -list -project GreymanExecutive.xcodeproj 2>&1 || true
 
       - name: Build Pure Native Swift iOS App (Unsigned)
         run: |
-          cd GreymanExecutiveApp
           xcodebuild archive \
             -project GreymanExecutive.xcodeproj \
             -scheme GreymanExecutive \
