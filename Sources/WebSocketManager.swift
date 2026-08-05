@@ -96,7 +96,7 @@ class WebSocketManager: NSObject, ObservableObject, URLSessionWebSocketDelegate 
         switch type {
         case "audio_update":
             lastCommand = "🎙️ New audio update incoming..."
-            if let url = json["url"] as? String, let streamURL = URL(string: url) {
+            if let url = json["url"] as? String, let _ = URL(string: url) {
                 AudioEngine.shared.play()
             }
         case "command":

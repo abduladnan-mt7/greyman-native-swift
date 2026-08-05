@@ -26,7 +26,7 @@ class PermissionsManager: ObservableObject {
     }
 
     func requestMic() {
-        AVAudioApplication.requestRecordPermission { [weak self] granted in
+        AVAudioSession.sharedInstance().requestRecordPermission { [weak self] granted in
             DispatchQueue.main.async { self?.micGranted = granted }
         }
     }
