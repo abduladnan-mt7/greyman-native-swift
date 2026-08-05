@@ -5,11 +5,14 @@ import Foundation
 import CoreLocation
 import HealthKit
 import LocalAuthentication
-import CoreNFC
 import BackgroundTasks
 import UserNotifications
 import AVFoundation
 import Contacts
+import UIKit
+import SwiftUI
+import MediaPlayer
+import Speech
 
 // MARK: - 1. FACE ID / TOUCH ID BIOMETRIC LOCK
 class BiometricLock: ObservableObject {

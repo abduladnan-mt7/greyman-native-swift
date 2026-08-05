@@ -4,6 +4,8 @@
 
 import Foundation
 import Combine
+import UserNotifications
+import UIKit
 
 class WebSocketManager: NSObject, ObservableObject, URLSessionWebSocketDelegate {
     static let shared = WebSocketManager()
