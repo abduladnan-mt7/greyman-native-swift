@@ -1,0 +1,73 @@
+name: Build Pure Native Swift iOS App - Greyman Executive
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-swift-ios:
+    runs-on: macos-15
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate Xcode Project from project.yml
+        run: |
+          cd GreymanExecutiveApp
+          xcodegen generate
+          echo "Generated project files:"
+          ls -la
+
+      - name: Show Available Schemes
+        run: |
+          cd GreymanExecutiveApp
+          xcodebuild -list -project GreymanExecutive.xcodeproj 2>&1 || true
+
+      - name: Build Pure Native Swift iOS App (Unsigned)
+        run: |
+          cd GreymanExecutiveApp
+          xcodebuild archive \
+            -project GreymanExecutive.xcodeproj \
+            -scheme GreymanExecutive \
+            -archivePath $RUNNER_TEMP/GreymanExecutive.xcarchive \
+            -configuration Release \
+            -sdk iphoneos \
+            -destination "generic/platform=iOS" \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            ENABLE_BITCODE=NO \
+            | xcpretty || xcodebuild archive \
+            -project GreymanExecutive.xcodeproj \
+            -scheme GreymanExecutive \
+            -archivePath $RUNNER_TEMP/GreymanExecutive.xcarchive \
+            -configuration Release \
+            -sdk iphoneos \
+            -destination "generic/platform=iOS" \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            ENABLE_BITCODE=NO
+
+      - name: Package .ipa
+        run: |
+          ARCHIVE="$RUNNER_TEMP/GreymanExecutive.xcarchive"
+          ls "$ARCHIVE/Products/Applications/" || (echo "Archive contents:" && find "$ARCHIVE" -type f | head -30 && exit 1)
+          mkdir -p "$RUNNER_TEMP/Payload"
+          APP=$(find "$ARCHIVE/Products/Applications" -name "*.app" | head -1)
+          echo "Found app: $APP"
+          cp -r "$APP" "$RUNNER_TEMP/Payload/"
+          cd "$RUNNER_TEMP"
+          zip -r GreymanExecutive_Native.ipa Payload
+          echo "IPA size: $(du -sh GreymanExecutive_Native.ipa)"
+
+      - name: Upload Native Swift .ipa
+        uses: actions/upload-artifact@v4
+        with:
+          name: GreymanExecutive-NativeSwift
+          path: ${{ runner.temp }}/GreymanExecutive_Native.ipa
+          retention-days: 30

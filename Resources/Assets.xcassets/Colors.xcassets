@@ -1,0 +1,35 @@
+{
+  "colors": [
+    {
+      "color": { "color-space": "srgb", "components": { "red": "0.024", "green": "0.055", "blue": "0.118", "alpha": "1.000" } },
+      "idiom": "universal",
+      "name": "BG"
+    },
+    {
+      "color": { "color-space": "srgb", "components": { "red": "0.082", "green": "0.118", "blue": "0.220", "alpha": "0.900" } },
+      "idiom": "universal",
+      "name": "CardBG"
+    },
+    {
+      "color": { "color-space": "srgb", "components": { "red": "0.024", "green": "0.718", "blue": "0.831", "alpha": "1.000" } },
+      "idiom": "universal",
+      "name": "Cyan"
+    },
+    {
+      "color": { "color-space": "srgb", "components": { "red": "0.235", "green": "0.392", "blue": "0.976", "alpha": "1.000" } },
+      "idiom": "universal",
+      "name": "Blue"
+    },
+    {
+      "color": { "color-space": "srgb", "components": { "red": "0.063", "green": "0.690", "blue": "0.510", "alpha": "1.000" } },
+      "idiom": "universal",
+      "name": "Green"
+    },
+    {
+      "color": { "color-space": "srgb", "components": { "red": "0.580", "green": "0.612", "blue": "0.706", "alpha": "1.000" } },
+      "idiom": "universal",
+      "name": "TextSecondary"
+    }
+  ],
+  "info": { "author": "xcode", "version": 1 }
+}

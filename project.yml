@@ -1,0 +1,52 @@
+name: GreymanExecutive
+options:
+  bundleIdPrefix: control.anticode
+  deploymentTarget:
+    iOS: "16.4"
+  xcodeVersion: "15.4"
+  groupSortPosition: top
+  createIntermediateGroups: true
+
+targets:
+  GreymanExecutive:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sources
+    resources:
+      - path: Resources
+    info:
+      path: Resources/Info.plist
+      properties:
+        CFBundleName: "Greyman Executive"
+        CFBundleDisplayName: "Greyman"
+        CFBundleIdentifier: control.anticode.greyman.executive
+        CFBundleShortVersionString: "1.0"
+        CFBundleVersion: "1"
+        UIBackgroundModes:
+          - audio
+          - fetch
+          - remote-notification
+          - voip
+        NSMicrophoneUsageDescription: "Greyman uses the microphone to receive your voice commands."
+        NSCameraUsageDescription: "Greyman uses the camera for executive identity verification."
+        NSSpeechRecognitionUsageDescription: "Greyman uses speech recognition to understand your commands."
+        UILaunchStoryboardName: ""
+        UIApplicationSupportsIndirectInputEvents: true
+        NSAppTransportSecurity:
+          NSAllowsArbitraryLoads: true
+        UIStatusBarStyle: UIStatusBarStyleLightContent
+        UIUserInterfaceStyle: Dark
+    settings:
+      base:
+        SWIFT_VERSION: "5.9"
+        PRODUCT_BUNDLE_IDENTIFIER: control.anticode.greyman.executive
+        TARGETED_DEVICE_FAMILY: "1"
+        IPHONEOS_DEPLOYMENT_TARGET: "16.4"
+        CODE_SIGN_IDENTITY: ""
+        CODE_SIGNING_REQUIRED: NO
+        CODE_SIGNING_ALLOWED: NO
+        ENABLE_BITCODE: NO
+        CURRENT_PROJECT_VERSION: 1
+        MARKETING_VERSION: "1.0"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
